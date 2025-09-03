@@ -14,9 +14,9 @@
 <body>
     <div class="container max-w-[100vw] min-h-[100vh] font-[sans]">
         <nav class="bg-[#F9F5F6] w-full py-5 px-5 sm:px-20 flex justify-between items-center">
-            <h1 class="font-[cursive] text-2xl sm:text-3xl font-bold"><a href="/">SRM</a></h1>
-            <ul class="flex gap-3 md:gap-5 text-md lg:text-lg font-semibold ">
-                <li><a href="/"
+            <h1 class="font-[cursive] text-2xl sm:text-3xl font-bold"><a href="/home">SRM</a></h1>
+            <ul class="flex gap-3 md:gap-5 text-md lg:text-lg font-semibold items-center">
+                <li><a href="/home"
                         class="hover:border-b-2 hover:border-blue-500 hover:text-blue-500 duration-300 ease">Home</a>
                 </li>
                 <li><a href="/add"
@@ -25,6 +25,19 @@
                 <li><a href="/allstudents"
                         class="hover:border-b-2 hover:border-blue-500 hover:text-blue-500 duration-300 ease">All
                         Students</a></li>
+                <li class="profile w-10 relative"><img class="rounded-full border-2 cursor-pointer border-indigo-500"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7VxDe4wzr6eLzRrpRXsqUl1pgSst3Q1XytA&s"
+                        alt="">
+                    <div
+                        class="box bg-gray-200 absolute rounded-md right-[-150%] top-[100%] overflow-hidden hidden shadow-black shadow-md self-center">
+                        <div class="mail p-2 border-b-1 border-black flex gap-2  hover:bg-gray-100 duration-300"><i
+                                class="ri-user-fill text-indigo-500"></i>
+                            <%= femail %>
+                        </div>
+                        <div class="logout p-2 flex gap-2 cursor-pointer hover:bg-gray-100 duration-300"><i
+                                class="ri-logout-box-r-line text-red-500 text-xl"></i><a href="/logout">Logout</a></div>
+                    </div>
+                </li>
             </ul>
         </nav>
         <main class="w-full py-5 px-5 sm:px-20 flex flex-col items-center justify-center ">
@@ -60,7 +73,7 @@
     </div>
 
 
-    const 
+    const
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="/javascripts/script.js"></script>
 </body>

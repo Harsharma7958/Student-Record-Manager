@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container min-w-[100vw] min-h-[100vh] font-[sans]">
+        <nav class="bg-[#F9F5F6] w-full py-5 px-5 sm:px-20 flex justify-between items-center">
+            <h1 class="font-[cursive] text-2xl sm:text-3xl font-bold"><a href="/">SRM</a></h1>
+        </nav>
+        <main class="w-full h-[85vh] py-5 px-5 sm:px-20 flex flex-col items-center justify-center lg:flex-row ">
+            <form action="/create" method="post"
+                class="flex flex-col items-center border-black border-1 py-5 px-5 w-full sm:w-auto sm:px-10 rounded-lg gap-6 shadow-md shadow-black">
+                <h2 class="text-2xl font-bold mb-5 underline">Faculty SignUp</h2>
+                <div class=" border-b-2 border-indigo-500 duration-300">
+                    <i class="ri-user-fill text-indigo-500"></i>
+                    <input type="text" placeholder="Faculty Name" name="fname"
+                        class="bg-transperant outline-none p-[2px]">
+                </div>
+                <div class=" border-b-2 border-indigo-500 duration-300">
+                    <i class="ri-mail-open-fill text-indigo-500"></i>
+                    <input type="email" placeholder="Faculty Email" name="femail"
+                        class="bg-transperant outline-none p-[2px]">
+                </div>
+                <div class=" border-b-2 border-indigo-500 duration-300 ">
+                    <i class="ri-booklet-fill text-indigo-500"></i>
+                    <select name="fclass" id="fcalss" class=" outline-none ">
+                        <option default value="Select Class">
+                            Select Class
+                        </option>
+                        <% ['Class I', 'Class II' , 'Class III' , 'Class IV' , 'Class V' , 'Class VI' , 'Class VII'
+                            , 'Class VIII' , 'Class IX' , 'Class X' , 'Class XI' , 'Class XII' ].forEach((e)=>{ %>
+                            <option value="<%= e %>">
+                                <%= e %>
+                            </option>
+                            <% }) %>
+                    </select>
+                </div>
+                <div class=" border-b-2 border-indigo-500 duration-300">
+                    <i class="ri-mail-open-fill text-indigo-500"></i>
+                    <input type="password" placeholder="Password" name="fpass"
+                        class="bg-transperant outline-none p-[2px]">
+                </div>
+                <span class="self-center">Already have an account? <a href="/login" class="text-blue-500 underline">Login</a></span>
+                <input type="submit" value="SignUp"
+                    class="bg-indigo-500 px-4 py-[6px] rounded-md text-lg font-semibold text-white hover:bg-indigo-900 duration-300 shadow-xl shadow-indigo-500">
+            </form>
+        </main>
+    </div>
+</body>
+
+</html>
