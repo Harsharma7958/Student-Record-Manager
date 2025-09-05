@@ -14,11 +14,19 @@
     <div class="container min-w-[100vw] min-h-[100vh] font-[sans]">
         <nav class="bg-[#F9F5F6] w-full py-5 px-5 sm:px-20 flex justify-between items-center">
             <h1 class="font-[cursive] text-2xl sm:text-3xl font-bold"><a href="/">SRM</a></h1>
+            <ul class="flex gap-3 md:gap-5 text-md lg:text-lg font-semibold ">
+                <li><a href="/admin"
+                        class="hover:border-b-2 hover:border-blue-500 hover:text-blue-500 duration-300 ease">Home</a>
+                </li>
+                <li><a href="/adminlogin"
+                        class="bg-indigo-500 text-white px-3 py-2 rounded-md shadow-indigo-500 shadow-lg hover:bg-indigo-900 duration-300 ease">Logout</a>
+                </li>
+            </ul>
         </nav>
         <main class="w-full h-[85vh] py-5 px-5 sm:px-20 flex flex-col items-center justify-center lg:flex-row ">
             <form action="/create" method="post"
                 class="flex flex-col items-center border-black border-1 py-5 px-5 w-full sm:w-auto sm:px-10 rounded-lg gap-6 shadow-md shadow-black">
-                <h2 class="text-2xl font-bold mb-5 underline">Faculty SignUp</h2>
+                <h2 class="text-2xl font-bold mb-5 underline">Add Faculty</h2>
                 <div class=" border-b-2 border-indigo-500 duration-300">
                     <i class="ri-user-fill text-indigo-500"></i>
                     <input type="text" placeholder="Faculty Name" name="fname"
@@ -48,8 +56,9 @@
                     <input type="password" placeholder="Password" name="fpass"
                         class="bg-transperant outline-none p-[2px]">
                 </div>
-                <span class="self-center">Already have an account? <a href="/login" class="text-blue-500 underline">Login</a></span>
-                <input type="submit" value="SignUp"
+                <span class="self-center">Already have an account? <a href="/login"
+                        class="text-blue-500 underline">Login</a></span>
+                <input type="submit" value="Add Faculty"
                     class="bg-indigo-500 px-4 py-[6px] rounded-md text-lg font-semibold text-white hover:bg-indigo-900 duration-300 shadow-xl shadow-indigo-500">
             </form>
         </main>

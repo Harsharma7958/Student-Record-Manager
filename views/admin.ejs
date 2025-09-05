@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container min-w-[100vw] min-h-[100vh] font-[sans]">
+        <nav class="bg-[#F9F5F6] w-full py-5 px-5 sm:px-20 flex justify-between items-center">
+            <h1 class="font-[cursive] text-2xl sm:text-3xl font-bold"><a href="/">SRM</a></h1>
+            <ul class="flex gap-3 md:gap-5 text-md lg:text-lg font-semibold ">
+                <li><a href="/addfaculty"
+                        class="bg-indigo-500 text-white px-3 py-2 rounded-md shadow-indigo-500 shadow-lg hover:bg-indigo-900 duration-300 ease">Add
+                        Teachers</a></li>
+                <li><a href="/adminlogin"
+                        class="bg-indigo-500 text-white px-3 py-2 rounded-md shadow-indigo-500 shadow-lg hover:bg-indigo-900 duration-300 ease">Logout</a>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="w-full py-5 px-5 sm:px-20 flex flex-col items-center justify-center ">
+            <h1 class="text-2xl sm:text-4xl text-blue-500 border-b-2 border-blue-500 font-bold">All Teachers</h1>
+            <div class="allstudents mt-5">
+                <table class="w-full border-2 border-black">
+                    <tr class="border-2 border-black text-sm sm:text-xl hover:bg-blue-50 duration-500">
+                        <th class="border-2 border-black p-1 lg:p-3 w-30 ">S.No.</th>
+                        <th class="border-2 border-black p-1 lg:p-3 w-100 ">Name</th>
+                        <th class="border-2 border-black p-1 lg:p-3 w-30 ">Class</th>
+                        <th class="border-2 border-black p-1 lg:p-3 w-30 ">Update</th>
+                        <th class="border-2 border-black p-1 lg:p-3 w-30 ">Delete</th>
+                    </tr>
+                    <% if(faculty.length> 0){ %>
+                        <% faculty.forEach((teacher, index)=>{ %>
+                            <tr class="hover:bg-blue-50 duration-500">
+                                <td class="border-2 border-black p-[7px] lg:p-3 w-30 text-center">
+                                    <%= index + 1 %>.
+                                </td>
+                                <td class="border-2 border-black p-[7px] lg:p-3 w-100 text-center">
+                                    <%= teacher.fname %>
+                                </td>
+                                <td class="border-2 border-black p-[7px] lg:p-3 w-40 text-center">
+                                    <%= teacher.fclass %>
+                                </td>
+                                <td class="border-2 border-black p-[7px] lg:p-3 w-30 text-center"><a
+                                        href="/editfaculty/<%= teacher._id %>"
+                                        class="text-white text-md md:text-lg bg-blue-500 px-2 md:px-4 py-1 md:py-[7px] rounded-full border-1 border-blue-500 hover:bg-white hover:text-blue-500 duration-500 text-center"><i
+                                            class="ri-file-edit-fill "></i></a>
+                                </td>
+                                <td class="border-2 border-black p-1 lg:p-2 w-30 text-center"><a
+                                        href="/deletefaculty/<%= teacher._id %>"
+                                        class=" text-white text-md md:text-lg bg-red-500 px-2 md:px-4 py-1 md:py-[7px] rounded-full border-1 border-red-500 hover:bg-white hover:text-red-500 duration-500 text-center"><i
+                                            class="ri-delete-bin-fill"></i></a>
+                                </td>
+                            </tr>
+                            <% }) %>
+                                <% } else { %>
+                                    <tr>
+                                        <td class="p-1 font-semibold text-gray-700">No teachers yet!</td>
+                                    </tr>
+                                    <% } %>
+
+
+
+                </table>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

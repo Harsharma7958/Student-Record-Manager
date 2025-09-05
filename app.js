@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser')
 
 const studentSchema = require('./models/user')
 const facultySchema = require('./models/faculty')
-const { PassThrough } = require('stream')
+const adminSchema = require('./models/admin')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -18,7 +18,9 @@ app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => {
 
-    if (req.cookies.token === '') {
+    // console.log(req.cookies)
+
+    if (!req.cookies || !req.cookies.token) {
         res.render('index');
     } else {
         res.redirect('/home')
@@ -31,7 +33,7 @@ app.get('/home', (req, res) => {
     res.render('home', { femail })
 })
 
-app.get('/signup', (req, res) => {
+app.get('/addfaculty', (req, res) => {
     res.render('signup')
 })
 
@@ -45,7 +47,7 @@ app.post('/create', async (req, res) => {
                 const faculty = await facultySchema.create({ fname, femail, fclass, fpass: hash })
                 let token = jwt.sign(femail, 'mail');
                 res.cookie('token', token);
-                res.redirect('/home')
+                res.redirect('/admin')
             })
         })
     } else {
@@ -72,7 +74,7 @@ app.post('/login', async (req, res) => {
             }
         })
     } else {
-        res.redirect('/signup')
+        res.send('Contact admin! Email or password is incorrect! ❌')
     }
 })
 
@@ -81,11 +83,30 @@ app.get('/logout', (req, res) => {
     res.redirect('/')
 })
 
+app.get('/editfaculty/:id', async (req, res) => {
+    // console.log(req.params.id)
+    let editedFaculty = await facultySchema.findOne({ _id: req.params.id })
+    res.render('editfaculty', { editedFaculty })
+})
+
+app.post('/updatefaculty/:id', async (req, res) => {
+
+    let updatedFaculty = await facultySchema.findOneAndUpdate({ _id: req.params.id }, { fname: req.body.fname, fclass: req.body.fclass }, { new: true })
+    res.redirect('/admin')
+
+})
+
+app.get('/deletefaculty/:id', async (req, res) => {
+    let deletedFaculty = await facultySchema.findOneAndDelete({ _id: req.params.id })
+    res.redirect('/admin')
+})
+
 app.get('/allstudents', async (req, res) => {
     let token = req.cookies.token
     let femail = jwt.verify(token, 'mail')
     let allstudents = await studentSchema.find()
-    res.render('allstudents', { allstudents, femail })
+    let faculty = await facultySchema.findOne({ femail })
+    res.render('allstudents', { allstudents, femail, faculty })
 })
 
 app.get('/add', (req, res) => {
@@ -128,6 +149,52 @@ app.post('/update/:id', async (req, res) => {
     let token = req.cookies.token
     let femail = jwt.verify(token, 'mail')
     res.redirect('/allstudents', { femail })
+})
+
+// app.get('/adminsignup', (req, res) => {
+//     res.render('adminsignup')
+// })
+
+// app.post('/createadmin', (req, res) => {
+//     const { aemail, apass } = req.body;
+
+//     bcrypt.genSalt(10, (err, salt) => {
+//         bcrypt.hash(apass, salt, async (err, hash) => {
+//             let admin = await adminSchema.create({ aemail, apass: hash })
+//             res.redirect('/adminlogin')
+//         })
+//     })
+// })
+
+app.get('/adminlogin', (req, res) => {
+    res.render('adminlogin')
+})
+
+app.post('/adminlogin', async (req, res) => {
+    const { aemail, apass } = req.body
+
+    let admin = await adminSchema.findOne({ aemail })
+    if (admin === null) {
+        res.redirect('/login')
+    } else {
+        bcrypt.compare(apass, admin.apass, (err, result) => {
+            // console.log(result)
+            if (result) {
+                res.redirect('/admin')
+            }
+            else {
+                res.redirect('/adminlogin')
+            }
+        })
+
+    }
+
+})
+
+app.get('/admin', async (req, res) => {
+
+    const faculty = await facultySchema.find()
+    res.render('admin', { faculty })
 })
 
 app.listen(3000, () => {

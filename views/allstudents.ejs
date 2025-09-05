@@ -52,37 +52,39 @@
                         <th class="border-2 border-black p-1 lg:p-3 w-30 ">Delete</th>
                     </tr>
                     <% if(allstudents.length> 0){ %>
-                        <% allstudents.forEach((student, index)=>{ %>
-                            <tr class="hover:bg-blue-50 duration-500">
-                                <td class="border-2 border-black p-[7px] lg:p-3 w-30 text-center">
-                                    <%= index + 1 %>.
-                                </td>
-                                <td class="border-2 border-black p-[7px] lg:p-3 w-100 text-center">
-                                    <%= student.name %>
-                                </td>
-                                <td class="border-2 border-black p-[7px] lg:p-3 w-30 text-center">
-                                    <%= student.class %>
-                                </td>
-                                <td class="border-2 border-black p-[7px] lg:p-3 w-40 text-center">
-                                    <%= student.rollno %>
-                                </td>
-                                <td class="border-2 border-black p-[7px] lg:p-3 w-30 text-center"><a
-                                        href="/edit/<%= student.id %>"
-                                        class="text-white text-md md:text-lg bg-blue-500 px-2 md:px-4 py-1 md:py-[7px] rounded-full border-1 border-blue-500 hover:bg-white hover:text-blue-500 duration-500 text-center"><i
-                                            class="ri-file-edit-fill "></i></a>
-                                </td>
-                                <td class="border-2 border-black p-1 lg:p-2 w-30 text-center"><a
-                                        href="/delete/<%= student.id %>"
-                                        class=" text-white text-md md:text-lg bg-red-500 px-2 md:px-4 py-1 md:py-[7px] rounded-full border-1 border-red-500 hover:bg-white hover:text-red-500 duration-500 text-center"><i
-                                            class="ri-delete-bin-fill"></i></a>
-                                </td>
-                            </tr>
-                            <% }) %>
-                                <% } else { %>
-                                    <tr>
-                                        <td class="p-1 font-semibold text-gray-700">No students yet!</td>
-                                    </tr>
-                                    <% } %>
+                        <% allstudents.filter((student, index)=>{ %>
+                            <% if(student.class===faculty.fclass){ %>
+                                <tr class="hover:bg-blue-50 duration-500">
+                                    <td class="border-2 border-black p-[7px] lg:p-3 w-30 text-center">
+                                        <%= index + 1 %>.
+                                    </td>
+                                    <td class="border-2 border-black p-[7px] lg:p-3 w-100 text-center">
+                                        <%= student.name %>
+                                    </td>
+                                    <td class="border-2 border-black p-[7px] lg:p-3 w-30 text-center">
+                                        <%= student.class %>
+                                    </td>
+                                    <td class="border-2 border-black p-[7px] lg:p-3 w-40 text-center">
+                                        <%= student.rollno %>
+                                    </td>
+                                    <td class="border-2 border-black p-[7px] lg:p-3 w-30 text-center"><a
+                                            href="/edit/<%= student.id %>"
+                                            class="text-white text-md md:text-lg bg-blue-500 px-2 md:px-4 py-1 md:py-[7px] rounded-full border-1 border-blue-500 hover:bg-white hover:text-blue-500 duration-500 text-center"><i
+                                                class="ri-file-edit-fill "></i></a>
+                                    </td>
+                                    <td class="border-2 border-black p-1 lg:p-2 w-30 text-center"><a
+                                            href="/delete/<%= student.id %>"
+                                            class=" text-white text-md md:text-lg bg-red-500 px-2 md:px-4 py-1 md:py-[7px] rounded-full border-1 border-red-500 hover:bg-white hover:text-red-500 duration-500 text-center"><i
+                                                class="ri-delete-bin-fill"></i></a>
+                                    </td>
+                                </tr>
+                                <% } %>
+                                    <% }) %>
+                                        <% } else { %>
+                                            <tr>
+                                                <td class="p-1 font-semibold text-gray-700">No students yet!</td>
+                                            </tr>
+                                            <% } %>
 
 
 
